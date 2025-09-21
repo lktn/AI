@@ -53,7 +53,7 @@ class Model:
             self.cost, self.d_cost = BinaryCrossEntropy, d_BinaryCrossEntropy
 
     def predict(self, input):
-        input = input.reshape(1, -1)
+        input = input.reshape(-1, 1)
         for i in range(1, len(self.B) + 1):
             input = self.activation[i-1](input @ self.W[f"W{i}"] + self.B[f"B{i}"])
         return input
@@ -112,3 +112,4 @@ my_model = Model([
 my_model.compile(loss='MSE')
 
 my_model.train(x_train=x_train, y_train=y_train, epochs=10000, lr=0.001)
+
